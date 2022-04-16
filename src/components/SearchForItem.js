@@ -1,46 +1,50 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import TokenContext from '../context/token';
+import React, { useState, useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import debounce from 'lodash.debounce';
+import PropTypes from 'prop-types';
+import * as ROUTES from '../constants/routes';
 
-export default function SearchForItem() {
-  const [search, setSearch] = useState(null);
-  const token = useContext(TokenContext);
+export default function SearchForItem({ tracks }) {
+  const [inputValue, setInputValue] = useState('');
+  const { id } = useParams();
+  console.log(id);
+  let filteredTracks = tracks;
 
-  useEffect(() => {
-    const getSearchItems = async () => {
-      const response = await axios({
-        method: 'get',
-        url: 'https://api.spotify.com/v1/search?q=Sanah&type=track&market=PL&limit=10&offset=5',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const { data } = response;
-      const { tracks } = data;
-      setSearch(tracks.items);
-    };
-    getSearchItems();
-  }, [token]);
+  if (inputValue !== '') {
+    filteredTracks = tracks.filter((track) =>
+      track.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
 
-  const handleSearch = async (e) => {
-    const { value } = e.target;
-    setSearch(search.filter((track) => track.name.toLowerCase().includes(value.toLowerCase())));
+  const handleInput = (e) => {
+    setInputValue(e.target.value);
   };
-  console.log(search);
-  if (!search) return <h2>Loading tracks...</h2>;
+
+  const debouncedInputHandler = useMemo(() => debounce(handleInput, 300), []);
+
   return (
     <div>
       <div>
         <label htmlFor="search">Search tracks</label>
-        <input type="search" id="search" onInput={handleSearch} />
+        <input type="search" id="search" onInput={debouncedInputHandler} />
       </div>
       <div>
-        {search.map((track) => {
-          const { name, type, artists } = track;
-          return <div>{name}</div>;
+        {filteredTracks.map((track) => {
+          const { id } = track;
+          return (
+            <div key={id}>
+              <Link to={`${ROUTES.TRACKS}/${id}`}>
+                <h4>{track.name}</h4>
+              </Link>
+            </div>
+          );
         })}
       </div>
+      <div />
     </div>
   );
 }
+
+SearchForItem.propTypes = {
+  tracks: PropTypes.array
+};

@@ -1,16 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TokenContext from './context/token';
 import useToken from './hooks/use-token';
-import GetArtis from './components/GetArtist';
-import SearchForItem from './components/SearchForItem';
+import Dashboard from './pages/Dashboard';
+import * as ROUTES from './constants/routes';
 
 function App() {
   const { token } = useToken();
 
   return (
     <TokenContext.Provider value={token}>
-      <GetArtis />
-      <SearchForItem />
+      <Router>
+        <Routes>
+          <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+          <Route path={ROUTES.TRACKS} element={<Dashboard />} />
+        </Routes>
+      </Router>
     </TokenContext.Provider>
   );
 }

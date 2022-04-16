@@ -20,7 +20,7 @@ export default function useToken() {
       });
 
       const { data } = response;
-      setToken(data.access_token);
+      setToken(await data.access_token);
     };
     getToken();
   }, []);

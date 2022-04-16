@@ -5,7 +5,6 @@ import TokenContext from '../context/token';
 export default function GetArtis() {
   const [artist, setArtist] = useState(null);
   const token = useContext(TokenContext);
-  console.log(token);
 
   useEffect(() => {
     const getArtist = async () => {
@@ -18,7 +17,7 @@ export default function GetArtis() {
         }
       });
       const { data } = response;
-      setArtist(data);
+      setArtist(await data);
     };
     getArtist();
   }, [token]);

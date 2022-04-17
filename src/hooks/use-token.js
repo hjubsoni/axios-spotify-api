@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default function useToken() {
   const [token, setToken] = useState(null);
-  const clientId = '6ce3aa87d98746d8bc88c380b7a71b26';
-  const clientSecret = '9d05d90335ae4fc4ab9059d04eb30e32';
+  const clientId = '';
+  const clientSecret = '';
   const url = 'https://accounts.spotify.com/api/token';
 
   useEffect(() => {

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import TokenContext from '../context/token';
-import SearchForItem from '../components/SearchForItem';
-import Spinner from '../components/Spinner';
+import Header from '../components/Header';
 
-export default function Dashboard() {
-  const [tracksList, setTracksList] = useState(null);
+export default function Playlist() {
+  const [userSavedTracks, setUserSavedTracks] = useState(null);
   const token = useContext(TokenContext);
+
+  const { id } = useParams();
 
   useEffect(() => {
     if (!token) return;
@@ -20,13 +22,10 @@ export default function Dashboard() {
         }
       });
       const { data } = response;
-      const { tracks } = data;
-      setTracksList(await tracks.items);
+      console.log(data);
     };
     getSearchItems();
   }, [token]);
 
-  if (!tracksList) return <Spinner />;
-  console.log(token);
-  return <SearchForItem tracks={tracksList} />;
+  return <Header id={id} />;
 }

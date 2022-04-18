@@ -27,11 +27,7 @@ function App() {
 
 export default App;
 
-// dashboard with 10 search query params, each link to the track with uniqe id, info about artist + most popular
-// sannah songs.
 
-// my playlist with random playlist from my account.
-
-// album with few api calls to get 3 or 4 sanah albums.
-
-// liked songs
+// pages to build: home, playlist:id, track:id, search, 
+// api calls: searchparams, getPlaylist, addItemToPlaylist, getArtist, deletePlaylistItem,
+// http methods: get, post, delete, put(maybe: modyfing playlist details, or replace items.)

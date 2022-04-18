@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import * as ROUTES from './constants/routes';
 import Tracks from './pages/Tracks';
 import Playlist from './pages/Playlist';
+import Search from './pages/Search';
 
 function App() {
   const { token } = useToken();
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+          <Route path={ROUTES.SEARCH} element={<Search />} />
           <Route path={ROUTES.TRACKS} element={<Tracks />} />
           <Route path={ROUTES.PLAYLIST} element={<Playlist />} />
         </Routes>

@@ -2,4 +2,4 @@
 export const DASHBOARD = '/';
 export const SEARCH = '/search';
 export const TRACKS = '/track/:id';
-export const PLAYLIST = '/playlist/:id';
+export const PLAYLISTS = '/playlist/:id';

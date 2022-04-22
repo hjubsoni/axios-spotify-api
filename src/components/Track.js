@@ -6,7 +6,9 @@ export default function Track({ tracks, id }) {
   return (
     <div>
       {filterTracksById.map((track) => (
-        <h2 className="text-4xl underline">{track.name}</h2>
+        <h2 key={track.id} className="text-4xl underline">
+          {track.name}
+        </h2>
       ))}
     </div>
   );

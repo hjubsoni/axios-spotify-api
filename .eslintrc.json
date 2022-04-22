@@ -2,6 +2,7 @@
   "extends": [
     "airbnb",
     "prettier",
+    "react-app",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],

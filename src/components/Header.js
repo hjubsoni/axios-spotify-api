@@ -28,9 +28,11 @@ export default function Header() {
             <span>Search</span>
           </Link>
         </div>
-        <button type="button" className="flex items-center gap-4">
-          <Plus />
-          <span>Create Playlist</span>
+        <button type="button">
+          <Link to="/" className="flex items-center gap-4">
+            <Plus />
+            <span>Create Playlist</span>
+          </Link>
         </button>
         <hr />
         <Link

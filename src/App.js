@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TokenContext from './context/token';
 import useToken from './hooks/use-token';
-import Dashboard from './pages/Dashboard';
 import * as ROUTES from './constants/routes';
-import Tracks from './pages/Tracks';
-import Playlists from './pages/Playlists';
-import Search from './pages/Search';
+import Spinner from './components/Spinner';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Search = lazy(() => import('./pages/Search'));
+const Tracks = lazy(() => import('./pages/Tracks'));
+const Playlists = lazy(() => import('./pages/Playlists'));
 
 function App() {
   const { token } = useToken();
@@ -14,12 +16,14 @@ function App() {
   return (
     <TokenContext.Provider value={token}>
       <Router>
-        <Routes>
-          <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-          <Route path={ROUTES.SEARCH} element={<Search />} />
-          <Route path={ROUTES.TRACKS} element={<Tracks />} />
-          <Route path={ROUTES.PLAYLISTS} element={<Playlists />} />
-        </Routes>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.TRACKS} element={<Tracks />} />
+            <Route path={ROUTES.PLAYLISTS} element={<Playlists />} />
+          </Routes>
+        </Suspense>
       </Router>
     </TokenContext.Provider>
   );

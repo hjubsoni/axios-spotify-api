@@ -41,7 +41,7 @@ export default function SearchForItem({ tracks }) {
               const minutes = Math.floor(duration_ms / 60000);
 
               return (
-                <article className="border-2 border-black w-full p-4 " key={id}>
+                <article key={id} className="border-2 border-black w-full p-4 ">
                   <Link to={`/track/${id}`} className="flex">
                     <div>
                       <img src={album.images[2].url} alt="" />

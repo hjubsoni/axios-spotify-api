@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function useAxios({ method, url, token }) {
+export default function useAxios({ method, url, token, data }) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
